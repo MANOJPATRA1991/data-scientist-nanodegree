@@ -2,3 +2,4 @@
 
 1. [Stackoverflow Survey 2019](https://github.com/MANOJPATRA1991/data-scientist-nanodegree/tree/master/P1.%20Stackoverflow%20Survey%202019)
 2. [Disaster Response Pipeline](https://github.com/MANOJPATRA1991/data-scientist-nanodegree/tree/master/P2.%20Disaster%20Response%20Pipeline)
+3. [Homepage A/B Testing](https://github.com/MANOJPATRA1991/data-scientist-nanodegree/tree/master/P3.%20Homepage%20AB%20testing)
