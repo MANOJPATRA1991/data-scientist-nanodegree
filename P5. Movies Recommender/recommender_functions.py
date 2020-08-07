@@ -17,40 +17,40 @@ def get_movie_names(movie_ids, movies_df):
 
 
 def create_ranked_df(movies, reviews):
-        '''
-        INPUT
-        movies - the movies dataframe
-        reviews - the reviews dataframe
+    '''
+    INPUT
+    movies - the movies dataframe
+    reviews - the reviews dataframe
 
-        OUTPUT
-        ranked_movies - a dataframe with movies that are sorted by highest avg rating, more reviews, then time, and must have more than 4 ratings
-        '''
+    OUTPUT
+    ranked_movies - a dataframe with movies that are sorted by highest avg rating, more reviews, then time, and must have more than 4 ratings
+    '''
 
-        # Pull the average ratings and number of ratings for each movie
-        # Group the reviews by movie id
-        movie_ratings = reviews.groupby('movie_id')['rating']
-        # Get average rating for each movie
-        avg_ratings = movie_ratings.mean()
-        # GEt the total no. of user ratings for each movie
-        num_ratings = movie_ratings.count()
-        # Get the latest rating date for each movie and create a new column 'last_rating' for the same
-        last_rating = pd.DataFrame(reviews.groupby('movie_id').max()['date'])
-        last_rating.columns = ['last_rating']
+    # Pull the average ratings and number of ratings for each movie
+    # Group the reviews by movie id
+    movie_ratings = reviews.groupby('movie_id')['rating']
+    # Get average rating for each movie
+    avg_ratings = movie_ratings.mean()
+    # GEt the total no. of user ratings for each movie
+    num_ratings = movie_ratings.count()
+    # Get the latest rating date for each movie and create a new column 'last_rating' for the same
+    last_rating = pd.DataFrame(reviews.groupby('movie_id').max()['date'])
+    last_rating.columns = ['last_rating']
 
-        # Add Dates
-        rating_count_df = pd.DataFrame({'avg_rating': avg_ratings, 'num_ratings': num_ratings})
-        rating_count_df = rating_count_df.join(last_rating)
+    # Add Dates
+    rating_count_df = pd.DataFrame({'avg_rating': avg_ratings, 'num_ratings': num_ratings})
+    rating_count_df = rating_count_df.join(last_rating)
 
-        # Merge rating_count_df with the original movies dataset
-        movie_recs = movies.set_index('movie_id').join(rating_count_df)
+    # Merge rating_count_df with the original movies dataset
+    movie_recs = movies.set_index('movie_id').join(rating_count_df)
 
-        # Sort by avg rating, followed by number of ratings and last rating in order
-        ranked_movies = movie_recs.sort_values(['avg_rating', 'num_ratings', 'last_rating'], ascending=False)
+    # Sort by avg rating, followed by number of ratings and last rating in order
+    ranked_movies = movie_recs.sort_values(['avg_rating', 'num_ratings', 'last_rating'], ascending=False)
 
-        # For edge cases - subset the movie list to those with only 5 or more reviews
-        ranked_movies = ranked_movies[ranked_movies['num_ratings'] > 4]
+    # For edge cases - subset the movie list to those with only 5 or more reviews
+    ranked_movies = ranked_movies[ranked_movies['num_ratings'] > 4]
 
-        return ranked_movies
+    return ranked_movies
 
 
 def find_similar_movies(movie_id, movies_df):

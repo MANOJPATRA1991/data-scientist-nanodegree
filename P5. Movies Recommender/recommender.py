@@ -57,7 +57,7 @@ class Recommender():
         # Number of movies
         self.n_movies = self.user_item_matrix.shape[1]
         # Number of non-null ratings
-        self.num_ratings = np.count_nonzero(~np.isnan(self.user_item_mat))
+        self.num_ratings = np.count_nonzero(~np.isnan(self.user_item_matrix))
         # List of user ids 
         self.user_ids_series = np.array(self.user_item_df.index)
         # List of movie ids
@@ -152,7 +152,7 @@ class Recommender():
 
         OUTPUT:
         recs - (array) a list or numpy array of recommended movies like the
-                       given movie, or recs for a user_id given
+                        given movie, or recs for a user_id given
         '''
         rec_ids, rec_names = None, None
         if _id_type == 'user':
@@ -185,6 +185,63 @@ class Recommender():
 
         return rec_ids, rec_names
 
+
+    def create_train_test(self, order_by, training_size, testing_size):
+        '''    
+        INPUT:
+        reviews - (pandas df) dataframe to split into train and test
+        order_by - (string) column name to sort by
+        training_size - (int) number of rows in training set
+        testing_size - (int) number of columns in the test set
+        
+        OUTPUT:
+        training_df -  (pandas df) dataframe of the training set
+        validation_df - (pandas df) dataframe of the test set
+        '''
+        reviews_new = self.reviews.sort_values(order_by)
+        training_df = reviews_new.head(training_size)
+        validation_df = reviews_new.iloc[training_size:training_size+testing_size]
+        
+        return training_df, validation_df
+
+    def validation_comparison(self, val_df):
+        '''
+        INPUT:
+        val_df - the validation dataset created in the third cell above
+            
+        OUTPUT:
+        rmse - RMSE of how far off each value is from it's predicted value
+        perc_rated - percent of predictions out of all possible that could be rated
+        actual_v_pred - a 10 x 10 grid with counts for actual vs predicted values
+        preds - (list) predictions for any user-movie pairs where it was possible to make a prediction
+        acts - (list) actual values for any user-movie pairs where it was possible to make a prediction
+        '''
+        val_users = np.array(val_df['user_id'])
+        val_movies = np.array(val_df['movie_id'])
+        val_ratings = np.array(val_df['rating'])
+        
+        sse = 0
+        num_rated = 0
+        preds, acts = [], []
+        actual_v_pred = np.zeros((10, 10))
+        
+        for idx in range(len(val_users)):
+            try:
+                pred = self.predict_rating(val_users[idx], val_movies[idx])
+                sse += (pred - val_ratings[idx]) ** 2
+                num_rated += 1
+                preds.append(pred)
+                acts.append(val_ratings[idx])
+                actual_v_pred[11 - int(val_ratings[idx] - 1), int(round(pred) - 1)] += 1
+            except:
+                continue
+                
+        rmse = np.sqrt(sse / num_rated)
+        perc_rated = num_rated / len(val_users)
+        
+        
+        return rmse, perc_rated, actual_v_pred, preds, acts
+
 if __name__ == '__main__':
     import recommender as r
 
@@ -205,3 +262,15 @@ if __name__ == '__main__':
     print(rec.n_users)
     print(rec.n_movies)
     print(rec.num_ratings)
+
+    # Use our function to create training and test datasets for reviews
+    train_df, val_df = rec.create_train_test('date', 8000, 2000)
+
+    # Create user-by-item matrix - this will keep track of order of users and movies in u and v
+    train_user_item = train_df[['user_id', 'movie_id', 'rating', 'timestamp']]
+    train_data_df = train_user_item.groupby(['user_id', 'movie_id'])['rating'].max().unstack()
+    train_data_np = np.array(train_data_df)
+
+    rmse, perc_rated, actual_v_pred, preds, acts = rec.validation_comparison(val_df)
+    print(rmse, perc_rated, actual_v_pred, preds, acts)
+
