@@ -100,13 +100,51 @@ d) Which individual attributes contributed the most during the offer window?
 | - structured.ipynb: This notebook contains code related to preprocessing data and evaluation post project restructuring
 ```
 
+## Conclusion
+
+### Q1. Identify which groups of people are most responsive to each type of offer.
+
+Members who joined one to two years back relative to 2018, seem to be equally responsive to each offer while the trend decreases with new members (1 year or less than 1 year) and old members (more than two years).
+
+Males in age group of 1 (< 38 years) and 3 (between 55 years and 73 years) dominated across almost all the offers while females showed domination in group 3 (between 55 years and 73 years).
+
+Males in income groups 2 (45000 <= income < 60000) and 3 (60000 <= income < 75000) showed domination for informational discounts.
+
+### Q2. How best to present each type of offer?
+
+| Offer type | Web | Mobile | Email | Social | OFFER_TOTAL |
+| - | - | - | - | - | - |
+| Bogo | 7385 | 10779 | 10779 | 9541 | 38484 |
+| Discount | 8311 | 7366 | 8311 | 6024 | 30012 |
+| Informational | 2131 | 6187 | 6187 | 4056 | 18561 |
+| **TOTAL** | 17827 | 24332 | 25227 | 19621 |
+
+### Q3. How many people across different categories actually completed the transaction in the offer window?
+
+Approximately 12.8% of the total population for offer type BOGO completed the transaction in the offer window; 12% for offer type discount and 18% for informational type.
+
+### Q4. Which individual attributes contributed the most during the offer window?
+ 
+The top three that contributed the most are as follows:
+    1. Income
+    2. Age
+    3. Start year of membership
+    
 ## Results
-#### Identify which groups of people are most responsive to each type of offer.
+We also tried to build a model to predict the amount spent based on individual input and offer type.
 
-#### How best to present each type of offer?
+Final results on the different trained models are:
 
-#### How many people across different categories actually completed the transaction in the offer window?
+| Model | R2 score |
+| - | - |
+| SVM Regressor | 0.041794040197025595 |
+| Random Forest Regressor | -0.008060879289752076 |
+| Random Forest Regressor with Grid Search | 0.059339282853018704 |
 
-#### Which individual attributes contributed the most during the offer window?
+The final R2 score is better than that obtained with a SVM and with the default Random Forest. 
 
-## Acknowledgements
+As part of an improvement task, I will try out PCA and SVM Regressor with better hyperparameters.
+
+## Reference
+
+[Project Rubric](https://review.udacity.com/#!/rubrics/2345/view)
