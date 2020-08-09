@@ -89,13 +89,9 @@ d) Which individual attributes contributed the most during the offer window?
 |
 | - helpers.py: Helper functions reside here
 |
-| - visualization.py: Contains methods to visualize segmentation
-|
 | - starbucks.py: The StarbucksBase class is the heart of this project, it includes methods related to preprocessing,   merging dataframes, creating test and train sets, model training, evaluation, prediction and saving.
 |
 | - README.md
-|
-| - data_preprocessing.ipynb: This notebook contains code related to preprocessing data and evaluation prior to formatting and restructuring code across files
 |
 | - structured.ipynb: This notebook contains code related to preprocessing data and evaluation post project restructuring
 ```
