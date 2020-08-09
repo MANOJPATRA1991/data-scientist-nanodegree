@@ -147,4 +147,5 @@ As part of an improvement task, I will try out PCA and SVM Regressor with better
 
 ## Reference
 
+[Starbucks Promotion Strategy — Capstone Project for Udacity’s Data Scientist Nanodegree](https://medium.com/@manojpatra/starbucks-promotion-strategy-capstone-project-for-udacitys-data-scientist-nanodegree-12031f8e8d29?sk=61c90f2d9d653e7ec457971b7efd7bd4)
 [Project Rubric](https://review.udacity.com/#!/rubrics/2345/view)
