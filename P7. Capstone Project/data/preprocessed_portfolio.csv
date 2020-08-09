@@ -1,0 +1,11 @@
+reward,channels,difficulty,duration,offer_type,offer_id
+10,"['email', 'mobile', 'social']",10,7,bogo,BOGO/C10/R10/T7
+10,"['web', 'email', 'mobile', 'social']",10,5,bogo,BOGO/C10/R10/T5
+0,"['web', 'email', 'mobile']",0,4,informational,INFORMATIONAL/C0/R0/T4
+5,"['web', 'email', 'mobile']",5,7,bogo,BOGO/C5/R5/T7
+5,"['web', 'email']",20,10,discount,DISCOUNT/C20/R5/T10
+3,"['web', 'email', 'mobile', 'social']",7,7,discount,DISCOUNT/C7/R3/T7
+2,"['web', 'email', 'mobile', 'social']",10,10,discount,DISCOUNT/C10/R2/T10
+0,"['email', 'mobile', 'social']",0,3,informational,INFORMATIONAL/C0/R0/T3
+5,"['web', 'email', 'mobile', 'social']",5,5,bogo,BOGO/C5/R5/T5
+2,"['web', 'email', 'mobile']",10,7,discount,DISCOUNT/C10/R2/T7

@@ -1,0 +1,112 @@
+# Starbuck's Capstone Challenge
+
+## Dataset overview
+The data simulates how people make purchasing decisions and how those decisions are influenced by promotional offers.
+
+Each person in the simulation has some hidden traits that influence their purchasing patterns and are associated with their observable traits. 
+
+People produce various events, including receiving offers, opening offers, and making purchases.
+
+As a simplification, there are no explicit products to track. Only the amounts of each transaction or offer are recorded.
+There are three types of offers that can be sent: buy-one-get-one (BOGO), discount, and informational. 
+
+1. BOGO offer: a user needs to spend a certain amount to get a reward equal to that threshold amount.
+2. Discount: a user gains a reward equal to a fraction of the amount spent. 
+3. Informational offer: there is no reward, but neither is there a requisite amount that the user is expected to spend. 
+
+Offers can be delivered via multiple channels: Email, Mobile, Social, Web
+
+## Project Motivation
+
+**GOAL**:  To use the data to 
+
+a) Identify which groups of people are most responsive to each type of offer.
+
+b) How best to present each type of offer?
+
+c) How many people across different categories actually completed the transaction in the offer window?
+
+d) Which individual attributes contributed the most during the offer window?
+
+## Data Dictionary
+
+1. `profile.json`: Rewards program users (17000 users x 5 fields)
+    | Name | Type | Description |
+    | - | - | - |
+    | gender | categorical | M, F, O, or null |
+    | age | numeric | missing value encoded as 118 |
+    | id | string/hash |
+    | became_member_on | date | format YYYYMMDD |
+    | income | numeric | individual income |
+2. `portfolio.json`: Offers sent during 30-day test period (10 offers x 6 fields)
+    | Name | Type | Description |
+    | - | - | - |
+    | reward | numeric | money awarded for the amount spent |
+    |channels | list | web, email, mobile, social |
+    |difficulty | numeric | money required to be spent to receive reward |
+    | duration | numeric | time for offer to be open, in days |
+    | offer_type | string | bogo, discount, informational |
+    | id | string/hash |
+
+3. `transcript.json`: Event log (306648 events x 4 fields)
+    | Name | Type | Description |
+    | - | - | - |
+    | person | string/hash |
+    | event | string | offer received, offer viewed, transaction, offer completed |
+    | value | dictionary | different values depending on event type |
+    | offer id | string/hash | not associated with any "transaction" |
+    | amount | numeric | money spent in "transaction" |
+    | reward | numeric | money gained from "offer completed" |
+    | time | numeric | hours after start of test |
+
+## Project Structure
+
+```
+|
+| - data: Stores original and preprocessed data for easy usage
+|   |
+|   | - portfolio.json
+|   |
+|   | - profile.json
+|   |
+|   | - transcript.json
+|   |
+|   | - preprocessed_portfolio.csv
+|   |
+|   | - preprocessed_profile.csv
+|   |
+|   | - preprocessed_transcripts.csv
+|   |
+|   | - preprocessed_succ_tried_offers.csv
+|
+| - models: Stores the trained models
+|   |
+|   | - finalized_model.sav
+|   |
+|   | - rf_model.sav
+|   |
+|   | - svr_model.sav
+|
+| - helpers.py: Helper functions reside here
+|
+| - visualization.py: Contains methods to visualize segmentation
+|
+| - starbucks.py: The StarbucksBase class is the heart of this project, it includes methods related to preprocessing,   merging dataframes, creating test and train sets, model training, evaluation, prediction and saving.
+|
+| - README.md
+|
+| - data_preprocessing.ipynb: This notebook contains code related to preprocessing data and evaluation prior to formatting and restructuring code across files
+|
+| - structured.ipynb: This notebook contains code related to preprocessing data and evaluation post project restructuring
+```
+
+## Results
+#### Identify which groups of people are most responsive to each type of offer.
+
+#### How best to present each type of offer?
+
+#### How many people across different categories actually completed the transaction in the offer window?
+
+#### Which individual attributes contributed the most during the offer window?
+
+## Acknowledgements
