@@ -141,6 +141,10 @@ The final R2 score is better than that obtained with a SVM and with the default 
 
 As part of an improvement task, I will try out PCA and SVM Regressor with better hyperparameters.
 
+## Improvements
+
+As part of an improvement task, we can try out PCA to find out newer dimenstions leading to exploring different customer segments based on the amount spent across each offer category. Comparing these distributions with the distributions we performed earlier, might give use much more information about which individuals to send different offer codes.
+
 ## Reference
 
 [Starbucks Promotion Strategy — Capstone Project for Udacity’s Data Scientist Nanodegree](https://medium.com/@manojpatra/starbucks-promotion-strategy-capstone-project-for-udacitys-data-scientist-nanodegree-12031f8e8d29?sk=61c90f2d9d653e7ec457971b7efd7bd4)
