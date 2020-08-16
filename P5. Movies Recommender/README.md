@@ -14,13 +14,15 @@ We also quickly got introduced to the idea of being able to see how well your re
 
 Next, we looked at matrix factorization as a technique for making recommendations. Traditional singular value decomposition technique can be used when our matrices have no missing values. In this decomposition technique, a user-item (A) can be decomposed as follows:
 
-A=UΣVTA = U\Sigma V^TA=UΣVT
+A = UΣV<sup>T</sup>
 
-Where
+where
 
-    UUU gives information about how users are related to latent features.
-    Σ\SigmaΣ gives information about how much latent features matter towards recreating the user-item matrix.
-    VTV^TVT gives information about how much each movie is related to latent features.
+U gives information about how users are related to latent features.
+
+Σ gives information about how much latent features matter towards recreating the user-item matrix.
+
+V<sup>T</sup> gives information about how much each movie is related to latent features.
 
 Since this traditional decomposition doesn't actually work when our matrices have missing values, we looked at another method for decomposing matrices.
 
@@ -28,12 +30,13 @@ Since this traditional decomposition doesn't actually work when our matrices hav
 
 FunkSVD was a new method that we found to be useful for matrices with missing values. With this matrix factorization we decomposed a user-item (A) as follows:
 
-A=UVTA = UV^TA=UVT
+A = UV<sup>T</sup>
 
-Where
+where
 
-    UUU gives information about how users are related to latent features.
-    VTV^TVT gives information about how much each movie is related to latent features.
+U gives information about how users are related to latent features.
+
+V<sup>T</sup> gives information about how much each movie is related to latent features.
 
 We found that we could iterate to find the latent features in each of these matrices using gradient descent. We wrote a function to implement gradient descent to find the values within these two matrices.
 
